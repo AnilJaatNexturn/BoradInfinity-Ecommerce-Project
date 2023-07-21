@@ -2,7 +2,7 @@ OUTPUT 1
 
 . sqoop import \
 > --connect jdbc:mysql://localhost/E_Commerce_Tables \
-> --table clickStream_data --fields-terminated-by ',' \
+> --table customer_data --fields-terminated-by ',' \
 > --username training --password training
 
 .  sqoop import \
