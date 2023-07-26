@@ -105,8 +105,6 @@ Reading table information for completion of table and column names
 You can turn off this feature to get a quicker startup with -A
 
 Database changed
-mysql> LOAD DATA INFILE '/home/training/InputFiles/clickstream_data.csv.csv' INTO TABLE clickStream_data  FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '/n' IGNORE 1 ROWS;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ROWS' at line 1
 mysql> show tables;
 +-----------------------------+
 | Tables_in_E_Commerce_Tables |
@@ -116,86 +114,11 @@ mysql> show tables;
 | purchase_data               |
 +-----------------------------+
 3 rows in set (0.00 sec)
- 
-mysql> LOAD DATA INFILE '/home/training/InputFiles/clickstream_data.csv' INTO TABLE clickStream_data  FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '/n' IGNORE 1 LINES;
-ERROR 13 (HY000): Can't get stat of '/home/training/InputFiles/clickstream_data.csv' (Errcode: 13)
-mysql> LOAD DATA INFILE 'home/training/InputFiles/clickstream_data.csv.csv' INTO TABLE clickStream_data  FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '/r/n' IGNORE 1 LINES;
-ERROR 13 (HY000): Can't get stat of '/var/lib/mysql/home/training/InputFiles/clickstream_data.csv.csv' (Errcode: 2)
-mysql> LOAD DATA INFILE '/home/training/InputFiles/clickstream_data.csv.csv' INTO TABLE clickStream_data  FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '/r/n' IGNORE 1 LINES;
-ERROR 13 (HY000): Can't get stat of '/home/training/InputFiles/clickstream_data.csv.csv' (Errcode: 13)
-mysql> LOAD DATA INFILE '/home/training/InputFiles/clickstream_data.csv.csv' INTO TABLE clickStream_data  FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '/r/n' IGNORE 1 LINES;
-ERROR 13 (HY000): Can't get stat of '/home/training/InputFiles/clickstream_data.csv.csv' (Errcode: 13)
-mysql> LOAD DATA INFILE 'home/training/InputFiles/clickstream_data.csv.csv' INTO TABLE clickStream_data  FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '/r/n' IGNORE 1 LINES;
-ERROR 13 (HY000): Can't get stat of '/var/lib/mysql/home/training/InputFiles/clickstream_data.csv.csv' (Errcode: 2)
-mysql> LOAD DATA INFILE 'home/training/InputFiles/clickstream_data.csv.csv' INTO TABLE clickStream_data  FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '/r/n' IGNORE 1 LINES;
-ERROR 13 (HY000): Can't get stat of '/var/lib/mysql/home/training/InputFiles/clickstream_data.csv.csv' (Errcode: 2)
-mysql> LOAD DATA LOCAL INFILE '/home/training/InputFiles/clickstream.csv' INTO TABLE clickStream_data  FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '/r/n' IGNORE 1 LINES;
-Query OK, 0 rows affected (0.01 sec)
-Records: 0  Deleted: 0  Skipped: 0  Warnings: 0
-
-mysql> SHOW TABLES;
-+-----------------------------+
-| Tables_in_E_Commerce_Tables |
-+-----------------------------+
-| clickStream_data            |
-| customer_data               |
-| purchase_data               |
-+-----------------------------+
-3 rows in set (0.00 sec)
-
-mysql> SELECT * FROM clickStream_data;
-Empty set (0.00 sec)
-
-mysql> SHOW TABLES;
-+-----------------------------+
-| Tables_in_E_Commerce_Tables |
-+-----------------------------+
-| clickStream_data            |
-| customer_data               |
-| purchase_data               |
-+-----------------------------+
-3 rows in set (0.00 sec)
-
-mysql> SELECT * FROM clickStream_data;
-Empty set (0.00 sec)
-
-mysql> LOAD DATA LOCAL INFILE '/home/training/InputFiles/clickstream.csv' INTO TABLE clickStream_data  FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '/r/n' IGNORE 1 LINES;
-Query OK, 0 rows affected (0.00 sec)
-Records: 0  Deleted: 0  Skipped: 0  Warnings: 0
-
-mysql> LOAD DATA LOCAL INFILE '/home/training/InputFiles/customer.csv' INTO TABLE customer_data FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '/r/n' IGNORE 1 LINES;
-Query OK, 0 rows affected (0.00 sec)
-Records: 0  Deleted: 0  Skipped: 0  Warnings: 0
-
-mysql> select * from customer_data;
-Empty set (0.00 sec)
-
-mysql> select count(*) from customer_data;
-+----------+
-| count(*) |
-+----------+
-|        0 |
-+----------+
-1 row in set (0.00 sec)
-
-mysql> LOAD DATA LOCAL INFILE '/home/training/InputFiles/customer.csv' INTO TABLE customer_data FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '/n' IGNORE 1 LINES;
-Query OK, 0 rows affected (0.01 sec)
-Records: 0  Deleted: 0  Skipped: 0  Warnings: 0
-
-mysql> select count(*) from customer_data;
-+----------+
-| count(*) |
-+----------+
-|        0 |
-+----------+
-1 row in set (0.00 sec)
 
 mysql> LOAD DATA LOCAL INFILE '/home/training/InputFiles/customer.csv' INTO TABLE customer_data FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '/n' IGNORE 1 LINES;
 Query OK, 0 rows affected (0.00 sec)
 Records: 0  Deleted: 0  Skipped: 0  Warnings: 0
 
-mysql> LOAD DATA LOCAL INFILE '/home/training/InputFiles/customer.csv' INTO TABLE customer_data FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '/n' IGNORE 1 Rows;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Rows' at line 1
 mysql> LOAD DATA LOCAL INFILE '/home/training/InputFiles/customer.csv' INTO TABLE customer_data FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '/n' IGNORE 1 LINES;
 Query OK, 0 rows affected (0.00 sec)
 Records: 0  Deleted: 0  Skipped: 0  Warnings: 0
@@ -246,9 +169,6 @@ mysql> select * from customer_data where userID = 1 ;
 |      1 | NULL | NULL  |
 +--------+------+-------+
 1 row in set (0.00 sec)
-
-mysql> select * from customer_data where userID = 3 ;
-Empty set (0.00 sec)
 
 mysql> select userID from customer_data  ;
 +--------+
