@@ -7,7 +7,7 @@ OUTPUT 1
 
 .  sqoop import \
 > --connect jdbc:mysql://localhost/E_Commerce_Tables \
-> --table customer_data --fields-terminated-by ',' \
+> --table clickStream_data --fields-terminated-by ',' \
 > --username training --password training
 
 .. sqoop import --connect jdbc:mysql://localhost/E_Commerce_Tables --table purchase_data --fields-terminated-by ',' --username training --password training
@@ -52,7 +52,7 @@ then load the data
 
 LOAD DATA INPATH 'e_commerce_project/customer.csv' INTO TABLE customer_data;
 
-LOAD DATA INPATH 'e_commerce_project/customer.csv' INTO TABLE customer_data;
+LOAD DATA INPATH 'e_commerce_project/purchase.csv' INTO TABLE purchase_data;
 
 hive> LOAD DATA INPATH 'e_commerce_project/clickstream.csv' INTO TABLE clickstream_data;
 
