@@ -3,12 +3,6 @@ Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.p
 Hive history file=/tmp/training/hive_job_log_training_202307181731_1554205291.txt
 
 hive> create table clickStream_data(                                      
-    > userID INT,                                                         
-    > `timestamp` TIMESTAMP,                                              
-    > page STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STOREILE;
-FAILED: ParseException line 4:59 mismatched input 'STOREILE' expecting EOF near '',''
-
-hive> create table clickStream_data(                                      
     > `timestamp` TIMESTAMP,                                              
     > page STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;                
 OK
@@ -28,11 +22,6 @@ Loading data to table default.customer_data
 OK
 Time taken: 0.62 seconds
 hive> create table purchase_data(                                      
-    > userID INT, `timestamp` TIMESTAMP, amount DECIMAL(10,2))         
-    > ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
-FAILED: ParseException line 2:42 cannot recognize input near 'DECIMAL' '(' '10' in column type
-
-hive> create table purchase_data(                                      
     > userID INT, `timestamp` TIMESTAMP, amount DOUBLE)                
     > ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
 OK
@@ -41,10 +30,6 @@ hive> LOAD DATA INPATH 'e_commerce_project/purchase.csv' INTO TABLE purchase_dat
 Loading data to table default.purchase_data
 OK
 Time taken: 0.506 seconds
-hive> select * from purchase_data;
-OK
-Failed with exception java.io.IOException:java.lang.IllegalArgumentException: Timestamp format must be yyyy-mm-dd hh:mm:ss[.fffffffff]
-Time taken: 0.813 seconds
 hive> select * from customer_data;                                                
 OK
 NULL	name	email
@@ -54,9 +39,6 @@ NULL	name	email
 4	Lisa Brown	lisa.brown@example.com
 5	Michael Wilson	michael.wilson@example.com
 Time taken: 0.232 seconds
-hive> ALTER TABLE purchase_data 
-    > change timestamp STRING;
-FAILED: ParseException line 2:7 mismatched input 'timestamp' expecting Identifier near 'change' in rename column name
 hive> ALTER TABLE purchase_data 
     > change timestamp STRING;  
 FAILED: ParseException line 2:7 mismatched input 'timestamp' expecting Identifier near 'change' in rename column name
@@ -68,19 +50,12 @@ hive> drop table  clickStream_data
     > ;
 OK
 Time taken: 3.381 seconds
-hive> create table clickStream_data(                                                           
-    > userID INT,
-    > timestamp STRING,
-    > page STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
-FAILED: ParseException line 3:0 mismatched input 'timestamp' expecting Identifier near ',' in column specification
 
 hive> create table clickStream_data(                                                
     > `timestamp` STRING,                                                           
     > page STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
 OK
 Time taken: 0.36 seconds
-hive> LOAD DATA INPATH 'e_commerce_project/clickstream.csv' INTO TABLE ClickStream_data;
-FAILED: SemanticException Line 1:17 Invalid path ''e_commerce_project/clickstream.csv'': No files matching path hdfs://0.0.0.0:8020/user/training/e_commerce_project/clickstream.csv
 hive> LOAD DATA INPATH 'e_commerce_project/clickstream.csv, INTO TABLE clickStream_data;
 FAILED: ParseException line 1:18 mismatched input 'e_commerce_project' expecting StringLiteral near 'INPATH' in load statement
 
@@ -106,50 +81,6 @@ NULL	name	email
 4	Lisa Brown	lisa.brown@example.com
 5	Michael Wilson	michael.wilson@example.com
 Time taken: 0.507 seconds
-hive> select count(*) from clickstream_data;
-Total MapReduce jobs = 1
-Launching Job 1 out of 1
-Number of reduce tasks determined at compile time: 1
-In order to change the average load for a reducer (in bytes):
-  set hive.exec.reducers.bytes.per.reducer=<number>
-In order to limit the maximum number of reducers:
-  set hive.exec.reducers.max=<number>
-In order to set a constant number of reducers:
-  set mapred.reduce.tasks=<number>
-Starting Job = job_202307190657_0001, Tracking URL = http://0.0.0.0:50030/jobdetails.jsp?jobid=job_202307190657_0001
-Kill Command = /usr/lib/hadoop/bin/hadoop job  -Dmapred.job.tracker=0.0.0.0:8021 -kill job_202307190657_0001
-Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1
-2023-07-19 07:07:08,831 Stage-1 map = 0%,  reduce = 0%
-2023-07-19 07:07:13,314 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.36 sec
-2023-07-19 07:07:14,330 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.36 sec
-2023-07-19 07:07:15,347 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.36 sec
-2023-07-19 07:07:16,362 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.36 sec
-2023-07-19 07:07:17,376 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.36 sec
-2023-07-19 07:07:18,393 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 3.65 sec
-2023-07-19 07:07:19,412 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 3.65 sec
-2023-07-19 07:07:20,424 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 3.65 sec
-2023-07-19 07:07:21,447 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 3.65 sec
-MapReduce Total cumulative CPU time: 3 seconds 650 msec
-Ended Job = job_202307190657_0001
-MapReduce Jobs Launched: 
-Job 0: Map: 1  Reduce: 1   Cumulative CPU: 3.65 sec   HDFS Read: 0 HDFS Write: 0 SUCCESS
-Total MapReduce CPU Time Spent: 3 seconds 650 msec
-OK
-0
-Time taken: 20.686 seconds
-hive> describe clickstream_data;
-OK
-timestamp	string	
-page	string	
-Time taken: 0.12 seconds
-hive> drop table clickstream_data;
-OK
-Time taken: 0.493 seconds
-hive> create table clickstream_data(userID INT , 
-Display all 409 possibilities? (y or n) 
-hive> create table clickstream_data(userID INT ,timestamp STRING , page STRING)
-    > ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
-FAILED: ParseException line 1:42 mismatched input 'timestamp' expecting Identifier near ',' in column specification
 
 hive> create table clickstream_data(userID INT ,timestamps STRING , page STRING)
     > ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;         
