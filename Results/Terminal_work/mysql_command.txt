@@ -391,8 +391,6 @@ mysql> DESCRIBE clickStream_data;
 +-----------+-------------+------+-----+-------------------+-----------------------------+
 3 rows in set (0.01 sec)
 
-mysql> update table clickStream_data modify userID VARCHAR(50);
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table clickStream_data modify userID VARCHAR(50)' at line 1
 mysql> alter table clickStream_data modify column userID VARCHAR(50);
 Query OK, 13 rows affected (0.02 sec)
 Records: 13  Duplicates: 0  Warnings: 0
